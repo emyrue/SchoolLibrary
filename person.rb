@@ -1,6 +1,6 @@
 # This is the Person class, parent of student and teacher class
 class Person
-  def initialize(id, age, name = 'Unknown', parent_permission: true)
+  def initialize(age, id = 0, name = 'Unknown', parent_permission: true)
     @id = id
     @age = age
     @name = name
@@ -17,6 +17,6 @@ class Person
   private
 
   def of_age?
-    age > 18
+    @age >= 18
   end
 end
