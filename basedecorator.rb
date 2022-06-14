@@ -1,5 +1,4 @@
 require_relative 'nameable'
-require_relative 'person'
 
 class BaseDecorator < Nameable
   def initialize(person)
