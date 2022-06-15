@@ -7,6 +7,7 @@ class Person < Nameable
     @age = age
     @name = name
     @parent_permission = parent_permission
+    @rentals = []
   end
 
   attr_reader :id
@@ -18,6 +19,12 @@ class Person < Nameable
 
   def correct_name
     @name
+  end
+
+  def add_rental(rental)
+    return if @rentals.include?(rental)
+
+    @rentals.push(rental)
   end
 
   private
