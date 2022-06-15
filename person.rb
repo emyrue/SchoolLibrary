@@ -11,7 +11,7 @@ class Person < Nameable
   end
 
   attr_reader :id
-  attr_accessor :age, :name
+  attr_accessor :age, :name, :rentals
 
   def can_use_services?
     of_age? || @parent_permission
@@ -21,10 +21,8 @@ class Person < Nameable
     @name
   end
 
-  def add_rental(rental)
-    return if @rentals.include?(rental)
-
-    @rentals.push(rental)
+  def add_rental(book, date)
+    Rental.new(date, book, self)
   end
 
   private
