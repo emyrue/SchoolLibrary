@@ -1,6 +1,8 @@
-# This is the Person class, parent of student and teacher class
-class Person
-  def initialize(age, id = 0, name = 'Unknown', parent_permission: true)
+require_relative 'nameable'
+
+class Person < Nameable
+  def initialize(age:, id: 0, name: 'Unknown', parent_permission: true)
+    super
     @id = id
     @age = age
     @name = name
@@ -12,6 +14,10 @@ class Person
 
   def can_use_services?
     of_age? || @parent_permission
+  end
+
+  def correct_name
+    @name
   end
 
   private
