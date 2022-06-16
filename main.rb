@@ -2,9 +2,28 @@
 
 require_relative 'app'
 
-def main
+def execute(input, app)
+  case input.to_i
+  when 1
+    app.list_books
+  when 2
+    app.list_people
+  when 3
+    app.create_person
+  when 4
+    app.create_book
+  when 5
+    app.create_rental
+  when 6
+    app.list_rentals
+  else
+    break
+  end
+  gets.chomp
+end
+
+def menu
   app = App.new
-  puts "Welcome to the School Library app!\n"
   loop do
     puts 'Please choose an option by entering a number:'
     puts '1 - List all books'
@@ -15,26 +34,18 @@ def main
     puts '6 - List all rentals for a given person id'
     puts '7 - Exit'
     input = gets.chomp
-    case input.to_i
-    when 1
-      app.list_books
-    when 2
-      app.list_people
-    when 3
-      app.create_person
-    when 4
-      app.create_book
-    when 5
-      app.create_rental
-    when 6
-      app.list_rentals
-    when 7
-      break
-    else
+    while input > 7 || input < 1
       puts 'Please enter a valid option:'
+      input = gets.chomp
     end
-    gets.chomp
+    execute(input, app)
   end
+end
+
+def main
+  puts "Welcome to the School Library app!\n"
+  menu
+  puts 'Thank you for using this app!'
 end
 
 main

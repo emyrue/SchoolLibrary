@@ -11,9 +11,9 @@ require_relative 'trimmerdecorator'
 
 class App
   def initialize
-    @people = [Student.new(age: 22, name: 'Emily', classroom: Classroom.new(256))]
-    @books = [Book.new('Year of the Witch', 'Temperance Alda')]
-    @rentals = [[Rental.new('06-14-22', @books[0], @people[0])]]
+    @people = []
+    @books = []
+    @rentals = []
     @classroom = Classroom.new(1)
   end
 
@@ -23,11 +23,11 @@ class App
 
   def list_people
     @people.each_with_index do |person, index|
-      if person.classroom
-        type = 'Student'
-      else
-        type = 'Teacher'
-      end
+      type = if person.classroom
+               'Student'
+             else
+               'Teacher'
+             end
       puts "#{index}) [#{type}] Name: #{person.name}, ID: #{person.id} Age: #{person.age}"
     end
   end
@@ -50,11 +50,7 @@ class App
         print 'Please enter a valid option:'
         letter = gets.chomp
       end
-      if letter == 'y' || letter == 'Y'
-        permission = true
-      else
-        permission = false
-      end
+      permission = %w[y Y].include?(letter)
       new_person = Student.new(age: age, name: name, parent_permission: permission, classroom: @classroom)
     else
       print 'Specialization: '
@@ -80,14 +76,14 @@ class App
     puts 'Select a book from the following list by number'
     list_books
     book_index = gets.chomp.to_i
-    while !@books[book_index]
+    until @books[book_index]
       puts 'Please enter a valid option:'
       book_index = gets.chomp.to_i
     end
     puts 'Select a person from the following list by number (not id)'
     list_people
     person_index = gets.chomp.to_i
-    while !@people[person_index]
+    until @people[person_index]
       puts 'Please enter a valid option:'
       person_index = gets.chomp.to_i
     end
@@ -103,7 +99,25 @@ class App
     print 'ID: '
     id = gets.chomp.downcase
     found = false
-    @people.each do ||
+    person_index = -1
+    @people.each_with_index do |person, index|
+      if person.id == id
+        person_index = index
+        found = true
+      end
+    end
+    until found
+      print 'Please enter a valid option:'
+      id = gets.chomp.downcase
+      @people.each_with_index do |person, index|
+        if person.id == id
+          person_index = index
+          found = true
+        end
+      end
+    end
+    @rentals[person_index].each do |rental|
+      puts "Date: #{rental.date}, Book: \"#{rental.book.title}\" by #{rental.book.author}"
     end
   end
 end
