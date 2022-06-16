@@ -46,7 +46,7 @@ class App
     if type == 1
       print 'Has parent permission? [Y/N] '
       letter = gets.chomp
-      while letter != 'y' && letter != 'n' && letter != 'Y' && letter != 'N'
+      until %w[y Y n N].include?(letter)
         print 'Please enter a valid option:'
         letter = gets.chomp
       end
