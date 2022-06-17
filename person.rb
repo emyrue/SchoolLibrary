@@ -2,12 +2,12 @@ require_relative 'nameable'
 require 'securerandom'
 
 class Person < Nameable
-  def initialize(age:, name: 'Unknown', parent_permission: true)
+  def initialize(age:, name, dog: true)
     super()
     @id = SecureRandom.hex(3)
     @age = age
     @name = name
-    @parent_permission = parent_permission
+    @dog = dog
     @rentals = []
   end
 

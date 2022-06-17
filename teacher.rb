@@ -1,6 +1,6 @@
-require_relative 'person'
+require_relative 'student'
 
-class Teacher < Person
+class Teacher < Student
   def initialize(age:, specialization:, name: 'Unknown', parent_permission: true)
     super(age: age, parent_permission: parent_permission, name: name)
     @specialization = specialization
