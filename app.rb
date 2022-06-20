@@ -23,12 +23,7 @@ class App
 
   def list_people
     @people.each_with_index do |person, index|
-      type = if person.classroom
-               'Student'
-             else
-               'Teacher'
-             end
-      puts "#{index}) [#{type}] Name: #{person.name}, ID: #{person.id} Age: #{person.age}"
+      puts "#{index}) [#{person.class.to_s}] Name: #{person.name}, ID: #{person.id} Age: #{person.age}"
     end
   end
 
